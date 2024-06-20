@@ -1,0 +1,42 @@
+services:
+  kafka:
+    container_name: kafka
+    image: apache/kafka
+    #networks:
+    #  - order-network
+    #  - email-network
+    #  - stock-network
+
+  order-service:
+    container_name: order-service
+    build: ./order-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+    restart: on-failure
+    #networks:
+    #  - order-network
+
+#  email-service:
+#    container_name: email-service
+#    build: ./email-service
+#    depends_on:
+#      - kafka
+#    restart: on-failure
+#    networks:
+#      - email-network
+#
+#  stock-service:
+#    container_name: stock-service
+#    build: ./stock-service
+#    depends_on:
+#      - kafka
+#    restart: on-failure
+#    networks:
+#      - stock-network
+#
+#networks:
+#  order-network: {}
+#  email-network: {}
+#  stock-network: {}
