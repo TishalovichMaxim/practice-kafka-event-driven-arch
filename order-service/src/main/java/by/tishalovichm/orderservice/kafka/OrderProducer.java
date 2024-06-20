@@ -17,9 +17,9 @@ public class OrderProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderProducer.class);
 
-    private NewTopic topic;
+    private final NewTopic topic;
 
-    private KafkaTemplate<String, OrderEvent> kafkaTemplate;
+    private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
     public void sendMessage(OrderEvent event) {
         LOGGER.info(String.format("Produced event: %s", event.toString()));
