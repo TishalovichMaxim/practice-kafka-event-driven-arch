@@ -15,3 +15,5 @@ spring:
           json:
             trusted:
               packages: "*"
+  profiles:
+    active: docker

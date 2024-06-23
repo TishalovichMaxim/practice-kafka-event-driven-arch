@@ -9,3 +9,5 @@ spring:
     topic:
       name:
         order-topic
+  profiles:
+    active: docker
