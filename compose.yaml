@@ -8,8 +8,16 @@ services:
 
   stock-service:
     build: ./stock-service
+    ports:
+      - "8081:8080"
     depends_on:
       - kafka
+
+  stock-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: stock-db
 
   email-service:
     build: ./email-service

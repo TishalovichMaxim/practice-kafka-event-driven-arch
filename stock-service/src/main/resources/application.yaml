@@ -15,5 +15,13 @@ spring:
           json:
             trusted:
               packages: "*"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stock-db
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+
   profiles:
     active: docker
