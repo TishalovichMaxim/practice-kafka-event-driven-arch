@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/orders")
+@RequestMapping("${stock-api.base-url.name}")
 public class OrderController {
 
     private final OrderService service;

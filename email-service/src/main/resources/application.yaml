@@ -17,3 +17,6 @@ spring:
               packages: "*"
   profiles:
     active: docker
+
+server:
+  port: 8081

@@ -11,3 +11,7 @@ spring:
         order-topic
   profiles:
     active: docker
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stock-db
+    username: postgres
+    password: password
