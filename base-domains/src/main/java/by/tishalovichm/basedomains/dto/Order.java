@@ -1,5 +1,8 @@
 package by.tishalovichm.basedomains.dto;
 
+import by.tishalovichm.basedomains.validation.OrderNameConstraint;
+import by.tishalovichm.basedomains.validation.OrderPriceConstraint;
+import by.tishalovichm.basedomains.validation.OrderQuantityConstraint;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +19,13 @@ public class Order {
     private String orderId;
 
     @Column(nullable = false)
+    @OrderNameConstraint
     private String name;
 
+    @OrderQuantityConstraint
     private int quantity;
 
+    @OrderPriceConstraint
     private double price;
 
 }

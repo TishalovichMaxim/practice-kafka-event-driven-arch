@@ -3,6 +3,7 @@ package by.tishalovichm.orderservice.controller;
 import by.tishalovichm.basedomains.dto.Order;
 import by.tishalovichm.basedomains.dto.OrderEvent;
 import by.tishalovichm.orderservice.kafka.OrderProducer;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class OrderController {
     private final OrderProducer producer;
 
     @PostMapping
-    public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
+    public ResponseEntity<Order> placeOrder(@Valid @RequestBody Order order) {
         order.setOrderId(UUID.randomUUID().toString());
 
         OrderEvent orderEvent = new OrderEvent();
