@@ -3,15 +3,41 @@ spring:
     name: order-service
   kafka:
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: localhost:9094
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     topic:
       name:
         order-topic
-  profiles:
-    active: docker
+  #profiles:
+  #  active: docker
+
   datasource:
     url: jdbc:postgresql://localhost:5432/stock-db
     username: postgres
     password: password
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:18080/realms/order-realm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+order-api:
+  base-url:
+    name: api/v1/orders
+
+jwt:
+  auth:
+    converter:
+      resource-id: order-service
+      principal-attribute: principal_username
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+server:
+  port: 8082
