@@ -27,14 +27,17 @@ public class SecurityConfig {
             @Value("${stock-api.base-url.name}") String baseUrl) throws Exception {
         http.authorizeHttpRequests((authz) ->
                 authz.requestMatchers(HttpMethod.GET, baseUrl).permitAll()
-                        .requestMatchers(HttpMethod.GET, baseUrl + "/**").hasRole(USER)
-                        .requestMatchers(HttpMethod.PUT, baseUrl + "/**").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, baseUrl + "/**")
+                            .hasAnyRole(USER, ADMIN)
+                        .requestMatchers(HttpMethod.PUT, baseUrl + "/**")
+                            .hasRole(ADMIN)
                         .anyRequest().authenticated());
 
         http.sessionManagement(sess -> sess.sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS));
 
-        http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)));
+        http.oauth2ResourceServer(oauth2 -> oauth2.jwt(
+                jwt -> jwt.jwtAuthenticationConverter(jwtConverter)));
 
         return http.build();
     }
