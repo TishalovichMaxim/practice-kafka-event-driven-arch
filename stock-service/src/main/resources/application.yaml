@@ -5,7 +5,7 @@ spring:
     topic:
       name: order-topic
     consumer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: localhost:9094
       group-id: stock
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -29,8 +29,8 @@ spring:
           issuer-uri: http://localhost:18080/realms/order-realm
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
-  profiles:
-    active: docker
+#  profiles:
+#    active: docker
 
 jwt:
   auth:
@@ -49,4 +49,4 @@ stock-api:
     name: api/v1/orders
 
 server:
-  port: 8082
+  port: 8081
